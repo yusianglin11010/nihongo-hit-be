@@ -1,4 +1,4 @@
-# nehongo-hit-be
+# nihongo-hit-be
 
 - Server for providing japanese vocabulary data 
 - Google Sheet as DB
