@@ -32,7 +32,7 @@ jobs:
           push: true
           tags: devinlin11010/nihongo-hitter-be
   CD:
-    needs: docker
+    needs: CI
     
     runs-on: ubuntu-latest
 
