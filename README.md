@@ -6,4 +6,4 @@
 ## Roadmaps
 
 - [ ] add cache
-- [ ] add auto deployment
+- [x] add auto deployment
