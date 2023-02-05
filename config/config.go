@@ -8,9 +8,32 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/spf13/viper"
+
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
+
+type Config struct {
+	SheetID string
+	Port    string
+}
+
+func NewConfig() Config {
+
+	viper.SetConfigFile("./config/config.yaml")
+
+	if err := viper.ReadInConfig(); err != nil {
+		log.Fatal("read config fail", err)
+	}
+
+	port := viper.GetString("port")
+	sheetID := viper.GetString("sheetID")
+	return Config{
+		SheetID: sheetID,
+		Port:    port,
+	}
+}
 
 func NewClient() *http.Client {
 	b, err := os.ReadFile("credentials.json")

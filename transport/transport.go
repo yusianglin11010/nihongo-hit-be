@@ -1,13 +1,11 @@
 package transport
 
 import (
-	"context"
 	"errors"
 	"log"
 	"strconv"
 
 	"github.com/yusianglin11010/nihon-hitter/be/config"
-	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 )
 
@@ -21,16 +19,10 @@ type SheetRepo struct {
 	SheetID string
 }
 
-func NewSheetRepo(sheetID string) *SheetRepo {
-	ctx := context.Background()
-	client := config.NewClient()
-	srv, err := sheets.NewService(ctx, option.WithHTTPClient(client))
-	if err != nil {
-		log.Fatalf("Unable to retrieve Sheets client: %v", err)
-	}
+func NewSheetRepo(config config.Config, srv *sheets.Service) *SheetRepo {
 	return &SheetRepo{
 		Srv:     srv,
-		SheetID: sheetID,
+		SheetID: config.SheetID,
 	}
 }
 

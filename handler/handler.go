@@ -7,23 +7,23 @@ import (
 	"github.com/yusianglin11010/nihon-hitter/be/transport"
 )
 
-type sheetHandler struct {
+type SheetHandler struct {
 	sheetRepo *transport.SheetRepo
 }
 
-func NewHandler(sheetRepo *transport.SheetRepo) sheetHandler {
-	return sheetHandler{
+func NewHandler(sheetRepo *transport.SheetRepo) *SheetHandler {
+	return &SheetHandler{
 		sheetRepo: sheetRepo,
 	}
 }
 
-func GetHealth(c *gin.Context) {
+func (h *SheetHandler) GetHealth(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "pong",
 	})
 }
 
-func (h sheetHandler) GetKanjiQuestion(c *gin.Context) {
+func (h *SheetHandler) GetKanjiQuestion(c *gin.Context) {
 	question := map[string]string{}
 
 	maxRowNum := h.sheetRepo.GetRowNumber()
@@ -42,7 +42,7 @@ func (h sheetHandler) GetKanjiQuestion(c *gin.Context) {
 
 }
 
-func (h sheetHandler) GetImiQuestion(c *gin.Context) {
+func (h *SheetHandler) GetImiQuestion(c *gin.Context) {
 	question := map[string]string{}
 	maxRowNum := h.sheetRepo.GetRowNumber()
 	readStart := rand.Intn(maxRowNum-50) + 1
